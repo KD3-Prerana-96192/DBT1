@@ -1,0 +1,87 @@
+
+1
+
+mysql> SELECT odate, COUNT(DISTINCT snum) FROM orders GROUP BY odate;
++------------+----------------------+
+| odate      | COUNT(DISTINCT snum) |
++------------+----------------------+
+| 1990-10-03 |                    4 |
+| 1990-10-04 |                    3 |
++------------+----------------------+
+2 rows in set (0.00 sec)
+
+
+2
+mysql> SELECT CONCAT('For the city ', city,'the highest rating is: ', MAX(rating)) as highest_rating  FROM customers GROUP BY city;
++-------------------------------------------------+
+| highest_rating                                  |
++-------------------------------------------------+
+| For the city Londonthe highest rating is: 100   |
+| For the city Romethe highest rating is: 200     |
+| For the city San Josethe highest rating is: 300 |
+| For the city Berlinthe highest rating is: 300   |
++-------------------------------------------------+
+4 rows in set (0.00 sec)
+
+3
+
+mysql> SELECT odate, SUM(amt) FROM orders GROUP BY odate ORDER BY COUNT(amt) DESC;
++------------+----------+
+| odate      | SUM(amt) |
++------------+----------+
+| 1990-10-03 |  8944.59 |
+| 1990-10-04 | 16713.81 |
++------------+----------+
+2 rows in set (0.00 sec)
+
+
+4
+
+mysql> SELECT snum,  SUM(amt) FROM orders GROUP BY snum  HAVING SUM(amt)>2565.84;
++------+----------+
+| snum | SUM(amt) |
++------+----------+
+| 1001 | 15382.07 |
+| 1002 |  5546.15 |
++------+----------+
+2 rows in set (0.00 sec)
+
+
+5
+mysql> SELECT city, MAX(rating) FROM customers GROUP BY city;
++----------+-------------+
+| city     | MAX(rating) |
++----------+-------------+
+| London   |         100 |
+| Rome     |         200 |
+| San Jose |         300 |
+| Berlin   |         300 |
++----------+-------------+
+4 rows in set (0.01 sec)
+
+
+6
+mysql> SELECT snum, MAX(amt) FROM orders GROUP BY snum HAVING MAX(amt)>3000 ;
++------+----------+
+| snum | MAX(amt) |
++------+----------+
+| 1001 |  9891.88 |
+| 1002 |  5160.45 |
++------+----------+
+2 rows in set (0.00 sec)
+
+
+7
+mysql> SELECT cnum, MIN(amt) FROM orders GROUP BY cnum;
++------+----------+
+| cnum | MIN(amt) |
++------+----------+
+| 2008 |    18.69 |
+| 2001 |   767.19 |
+| 2007 |  1900.10 |
+| 2003 |  5160.45 |
+| 2002 |  1713.23 |
+| 2004 |    75.75 |
+| 2006 |  4723.00 |
++------+----------+
+7 rows in set (0.00 sec)
